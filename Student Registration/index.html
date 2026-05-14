@@ -49,43 +49,59 @@ input,select{margin:5px;padding:5px}
 </form>
 
 <script>
-let student={};
+let student = {};
 
 function show(n){
-    document.querySelectorAll(".step").forEach(s=>s.style.display="none");
-    document.getElementById("s"+n).style.display="block";
+    document.querySelectorAll(".step").forEach(s => s.style.display = "none");
+    document.getElementById("s" + n).style.display = "block";
 }
 
 function next1(){
+
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let phone = document.getElementById("phone");
+
     if(name.value && email.value && phone.value){
-        student.name=name.value;
-        student.email=email.value;
-        student.phone=phone.value;
+
+        student.name = name.value;
+        student.email = email.value;
+        student.phone = phone.value;
+
         show(2);
     }
 }
 
 function next2(){
+
+    let dept = document.getElementById("dept");
+    let year = document.getElementById("year");
+    let gpa = document.getElementById("gpa");
+
     if(dept.value && year.value && gpa.value){
-        student.dept=dept.value;
-        student.year=year.value;
-        student.gpa=gpa.value;
+
+        student.dept = dept.value;
+        student.year = year.value;
+        student.gpa = gpa.value;
+
         show(3);
     }
 }
 
 function save(){
-    student.course=course.value;
 
-    hname.value=student.name;
-    hemail.value=student.email;
-    hphone.value=student.phone;
-    hdept.value=student.dept;
-    hyear.value=student.year;
-    hgpa.value=student.gpa;
-    hcourse.value=student.course;
+    let course = document.getElementById("course");
+
+    student.course = course.value;
+
+    document.getElementById("hname").value = student.name;
+    document.getElementById("hemail").value = student.email;
+    document.getElementById("hphone").value = student.phone;
+    document.getElementById("hdept").value = student.dept;
+    document.getElementById("hyear").value = student.year;
+    document.getElementById("hgpa").value = student.gpa;
+    document.getElementById("hcourse").value = student.course;
 }
 </script>
-
 </body>
 </html>
