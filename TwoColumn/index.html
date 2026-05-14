@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    margin:0;
+    display:flex;
+    height:100vh;
+    font-family:Arial;
+}
+.left{
+    width:50%;
+    background:url('https://img.magnific.com/free-vector/abstract-website-banner-with-modern-shapes_1361-1738.jpg?semt=ais_hybrid&w=740&q=80') center/cover;
+}
+.right{
+    width:50%;
+    padding:40px;
+}
+input{
+    width:90%;
+    padding:8px;
+    margin:5px;
+}
+span{
+    color:red;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="left"></div>
+
+<div class="right">
+    <h2>Signup</h2>
+
+    <input type="text" placeholder="Name"><br>
+
+    <input type="text" id="email" placeholder="Email" onkeyup="checkEmail()">
+    <span id="emsg"></span><br>
+
+    <input type="password" id="pass" placeholder="Password" onkeyup="checkPass()">
+    <span id="pmsg"></span><br>
+
+    <input type="password" id="cpass" placeholder="Confirm Password"><br>
+
+    <input type="text" id="phone" placeholder="Phone" onkeyup="checkPhone()">
+    <span id="phmsg"></span>
+</div>
+
+<script>
+function checkEmail(){
+    let p=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emsg.innerHTML=p.test(email.value) ? "Valid" : "Invalid Email";
+}
+
+function checkPass(){
+    let v=pass.value;
+    if(v.length<6) pmsg.innerHTML="Weak";
+    else if(v.length<10) pmsg.innerHTML="Medium";
+    else pmsg.innerHTML="Strong";
+}
+
+function checkPhone(){
+    let p=/^\d{10}$/;
+    phmsg.innerHTML=p.test(phone.value) ? "Valid" : "Enter 10 digits";
+}
+</script>
+
+</body>
+</html>

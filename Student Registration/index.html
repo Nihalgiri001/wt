@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Registration</title>
+<style>
+body{text-align:center;font-family:Arial}
+.step{display:none}
+input,select{margin:5px;padding:5px}
+</style>
+</head>
+<body>
+
+<form action="register" method="post">
+    
+<div class="step" id="s1" style="display:block">
+    <h3>Step 1</h3>
+    <input type="text" id="name" placeholder="Name"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+    <input type="text" id="phone" placeholder="Phone"><br>
+    <button type="button" onclick="next1()">Next</button>
+</div>
+
+<div class="step" id="s2">
+    <h3>Step 2</h3>
+    <input type="text" id="dept" placeholder="Department"><br>
+    <input type="text" id="year" placeholder="Year"><br>
+    <input type="text" id="gpa" placeholder="GPA"><br>
+    <button type="button" onclick="show(1)">Back</button>
+    <button type="button" onclick="next2()">Next</button>
+</div>
+
+<div class="step" id="s3">
+    <h3>Step 3</h3>
+    <input type="text" id="course" placeholder="Course Preference"><br>
+
+    <!-- hidden fields -->
+    <input type="hidden" name="name" id="hname">
+    <input type="hidden" name="email" id="hemail">
+    <input type="hidden" name="phone" id="hphone">
+    <input type="hidden" name="dept" id="hdept">
+    <input type="hidden" name="year" id="hyear">
+    <input type="hidden" name="gpa" id="hgpa">
+    <input type="hidden" name="course" id="hcourse">
+
+    <button type="button" onclick="show(2)">Back</button>
+    <button type="submit" onclick="save()">Submit</button>
+</div>
+
+</form>
+
+<script>
+let student={};
+
+function show(n){
+    document.querySelectorAll(".step").forEach(s=>s.style.display="none");
+    document.getElementById("s"+n).style.display="block";
+}
+
+function next1(){
+    if(name.value && email.value && phone.value){
+        student.name=name.value;
+        student.email=email.value;
+        student.phone=phone.value;
+        show(2);
+    }
+}
+
+function next2(){
+    if(dept.value && year.value && gpa.value){
+        student.dept=dept.value;
+        student.year=year.value;
+        student.gpa=gpa.value;
+        show(3);
+    }
+}
+
+function save(){
+    student.course=course.value;
+
+    hname.value=student.name;
+    hemail.value=student.email;
+    hphone.value=student.phone;
+    hdept.value=student.dept;
+    hyear.value=student.year;
+    hgpa.value=student.gpa;
+    hcourse.value=student.course;
+}
+</script>
+
+</body>
+</html>

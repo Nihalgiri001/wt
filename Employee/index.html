@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="loadData()">All Employees</button>
+<button onclick="sortSalary()">Sort by Salary</button>
+<button onclick="filterExp()">Experience > 5</button>
+
+<table border="1">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Department</th>
+<th>Salary</th>
+<th>Experience</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+let emp=[];
+
+function loadXML(callback){
+    fetch("employees.xml")
+    .then(res => res.text())
+    .then(str => {
+        let xml = new DOMParser().parseFromString(str,"text/xml");
+        let list = xml.getElementsByTagName("employee");
+
+        emp=[];
+
+        for(let i=0;i<list.length;i++){
+            emp.push({
+                id:list[i].getElementsByTagName("id")[0].textContent,
+                name:list[i].getElementsByTagName("name")[0].textContent,
+                dept:list[i].getElementsByTagName("department")[0].textContent,
+                salary:parseInt(list[i].getElementsByTagName("salary")[0].textContent),
+                exp:parseInt(list[i].getElementsByTagName("experience")[0].textContent)
+            });
+        }
+
+        callback();
+    });
+}
+
+function show(arr){
+    let out="";
+    for(let i=0;i<arr.length;i++){
+        out += "<tr><td>"+arr[i].id+"</td><td>"+arr[i].name+
+        "</td><td>"+arr[i].dept+"</td><td>"+arr[i].salary+
+        "</td><td>"+arr[i].exp+"</td></tr>";
+    }
+    document.getElementById("data").innerHTML=out;
+}
+
+function loadData(){
+    loadXML(function(){
+        show(emp);
+    });
+}
+
+function sortSalary(){
+    loadXML(function(){
+        emp.sort((a,b)=>a.salary-b.salary);
+        show(emp);
+    });
+}
+
+function filterExp(){
+    loadXML(function(){
+        let x=emp.filter(e=>e.exp>5);
+        show(x);
+    });
+}
+</script>
+
+</body>
+</html>

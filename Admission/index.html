@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="admission" method="post">
+    Name: <input type="text" name="name"><br><br>
+
+    Physics: <input type="number" id="p" name="p" oninput="calc()"><br><br>
+    Chemistry: <input type="number" id="c" name="c" oninput="calc()"><br><br>
+    Maths: <input type="number" id="m" name="m" oninput="calc()"><br><br>
+
+    Entrance Score: <input type="number" name="entrance" id="e" oninput="calc()"><br><br>
+
+    Total: <span id="total">0</span><br>
+    Percentage: <span id="per">0</span><br>
+    Preview: <span id="preview">Not Eligible</span><br><br>
+
+    <input type="hidden" name="percentage" id="hper">
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+function calc(){
+    let p=+document.getElementById("p").value||0;
+    let c=+document.getElementById("c").value||0;
+    let m=+document.getElementById("m").value||0;
+    let e=+document.getElementById("e").value||0;
+
+    if(p>100||c>100||m>100||p<0||c<0||m<0){
+        alert("Marks must be 0-100");
+        return;
+    }
+
+    let total=p+c+m;
+    let per=total/3;
+
+    document.getElementById("total").innerHTML=total;
+    document.getElementById("per").innerHTML=per.toFixed(2);
+    document.getElementById("hper").value=per;
+
+    document.getElementById("preview").innerHTML =
+        (per>=70 && e>=60) ? "Eligible" : "Not Eligible";
+}
+</script>
+
+</body>
+</html>

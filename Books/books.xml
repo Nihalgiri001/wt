@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<books>
+    <book>
+        <title>Harry Potter</title>
+        <author>J.K.Rowling</author>
+        <genre>Fantasy</genre>
+        <year>2001</year>
+        <rating>4.8</rating>
+    </book>
+    <book>
+        <title>Wings of Fire</title>
+        <author>A.P.J Abdul Kalam</author>
+        <genre>Biography</genre>
+        <year>1999</year>
+        <rating>4.7</rating>
+    </book>
+    <book>
+        <title>The Alchemist</title>
+        <author>Paulo Coelho</author>
+        <genre>Fiction</genre>
+        <year>1988</year>
+        <rating>4.5</rating>
+    </book>
+    <book>
+        <title>1984</title>
+        <author>George Orwell</author>
+        <genre>Fiction</genre>
+        <year>1949</year>
+        <rating>4.6</rating>
+    </book>
+</books>

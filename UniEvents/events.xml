@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<events>
+    <event>
+    <name>Hackathon</name>
+    <department>CSE</department>
+    <date>2026-06-10</date>
+    <venue>Auditorium</venue>
+    <organizer>Turing Hut</organizer>
+    </event>
+    <event>
+    <name>AI Workshop</name>
+    <department>CSE</department>
+    <date>2026-05-20</date>
+    <venue>Seminar Hall</venue>
+    <organizer>AI Club</organizer>
+    </event>
+    <event>
+    <name>Robotics Expo</name>
+    <department>ECE</department>
+    <date>2026-05-25</date>
+    <venue>Block A</venue>
+    <organizer>Robotics Club</organizer>
+    </event>
+    <event>
+    <name>Business Summit</name>
+    <department>MBA</department>
+    <date>2026-06-01</date>
+    <venue>Conference Hall</venue>
+    <organizer>ED Cell</organizer>
+    </event>
+</events>

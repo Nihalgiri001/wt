@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:5px;
+}
+</style>
+</head>
+<body>
+
+<select id="genre" onchange="load()">
+    <option value="">All Genres</option>
+    <option>Fantasy</option>
+    <option>Biography</option>
+    <option>Fiction</option>
+</select>
+
+<button onclick="sortYear()">Sort by Year</button>
+<button onclick="sortRating()">Sort by Rating</button>
+
+<table>
+<tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <th>Year</th>
+    <th>Rating</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+let books=[];
+
+function fetchData(callback){
+    fetch("books.xml")
+    .then(r=>r.text())
+    .then(str=>{
+        let xml=new DOMParser().parseFromString(str,"text/xml");
+        let list=xml.getElementsByTagName("book");
+        books=[];
+
+        for(let b of list){
+            books.push({
+                title:b.getElementsByTagName("title")[0].textContent,
+                author:b.getElementsByTagName("author")[0].textContent,
+                genre:b.getElementsByTagName("genre")[0].textContent,
+                year:parseInt(b.getElementsByTagName("year")[0].textContent),
+                rating:parseFloat(b.getElementsByTagName("rating")[0].textContent)
+            });
+        }
+        callback();
+    });
+}
+
+function show(arr){
+    let g=genre.value;
+    let out="";
+
+    arr.filter(b=>g=="" || b.genre==g).forEach(b=>{
+        out+=`
+        <tr>
+        <td>${b.title}</td>
+        <td>${b.author}</td>
+        <td>${b.genre}</td>
+        <td>${b.year}</td>
+        <td>${b.rating}</td>
+        </tr>`;
+    });
+
+    data.innerHTML=out;
+}
+
+function load(){
+    fetchData(()=>show(books));
+}
+
+function sortYear(){
+    fetchData(()=>show(books.sort((a,b)=>a.year-b.year)));
+}
+
+function sortRating(){
+    fetchData(()=>show(books.sort((a,b)=>b.rating-a.rating)));
+}
+
+load();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<textarea id="txt" rows="8" cols="40" onkeyup="count()"></textarea>
+
+<h3 id="char">Characters: 0</h3>
+<h3>Words: <span id="word">0</span></h3>
+<h3>Sentences: <span id="sent">0</span></h3>
+
+<script>
+function count(){
+    let t=txt.value;
+
+    let chars=t.length;
+    let words=t.trim()=="" ? 0 : t.trim().split(/\s+/).length;
+    let sentences=t=="" ? 0 : t.split(/[.!?]+/).filter(x=>x.trim()!="").length;
+
+    char.innerHTML="Characters: "+chars;
+    word.innerHTML=words;
+    sent.innerHTML=sentences;
+
+    char.style.color = chars>200 ? "red" : "black";
+}
+</script>
+
+</body>
+</html>

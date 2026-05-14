@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{border:1px solid black;border-collapse:collapse;padding:5px}
+</style>
+</head>
+<body>
+
+<input type="text" id="search" placeholder="Search title" onkeyup="load()">
+
+<select id="sem" onchange="load()">
+    <option value="">All</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+</select>
+
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Credits</th>
+            <th>Instructor</th>
+            <th>Semester</th>
+        </tr>
+    </thead>
+    <tbody id="data"></tbody>
+</table>
+
+<script>
+function load(){
+    fetch("courses.xml")
+    .then(r=>r.text())
+    .then(str=>{
+        let xml=new DOMParser().parseFromString(str,"text/xml");
+        let courses=xml.getElementsByTagName("course");
+        let out="";
+        let s=search.value.toLowerCase();
+        let sem=document.getElementById("sem").value;
+
+        for(let c of courses){
+            let title=c.getElementsByTagName("title")[0].textContent;
+            let semester=c.getElementsByTagName("semester")[0].textContent;
+
+            if((sem=="" || sem==semester) &&
+               title.toLowerCase().includes(s)){
+
+                out+=`
+                <tr>
+                <td>${c.getElementsByTagName("code")[0].textContent}</td>
+                <td>${title}</td>
+                <td>${c.getElementsByTagName("credits")[0].textContent}</td>
+                <td>${c.getElementsByTagName("instructor")[0].textContent}</td>
+                <td>${semester}</td>
+                </tr>`;
+            }
+        }
+        data.innerHTML=out;
+    });
+}
+load();
+</script>
+
+</body>
+</html>

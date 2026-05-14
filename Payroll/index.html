@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="payroll" method="post" onsubmit="return validate()">
+    Name: <input type="text" name="name" id="n"><br><br>
+    Basic Salary: <input type="number" name="basic" id="b"><br><br>
+    HRA %: <input type="number" name="hra" id="h"><br><br>
+    Bonus: <input type="number" name="bonus" id="bo"><br><br>
+
+    <button type="submit">Calculate</button>
+</form>
+
+<script>
+function validate(){
+    if(n.value=="" || b.value<=0 || h.value<0 || bo.value<0){
+        alert("Enter valid inputs");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>

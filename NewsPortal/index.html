@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{font-family:Arial}
+nav{
+    background:black;
+    color:white;
+    padding:10px;
+}
+.featured,.card,.trending{
+    border:1px solid black;
+    padding:10px;
+    margin:10px;
+}
+.card{
+    display:inline-block;
+    width:200px;
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <button onclick="filter('All')">All</button>
+    <button onclick="filter('Sports')">Sports</button>
+    <button onclick="filter('Technology')">Technology</button>
+    <button onclick="filter('Politics')">Politics</button>
+</nav>
+
+<div class="featured">
+    <h2>Featured Article</h2>
+    <p>Top Headline News</p>
+</div>
+
+<div class="trending">
+    <h3>Trending</h3>
+    <p>Breaking News</p>
+</div>
+
+<div class="card" data-cat="Sports">Sports News 1</div>
+<div class="card" data-cat="Technology">Tech News 1</div>
+<div class="card" data-cat="Politics">Politics News 1</div>
+<div class="card" data-cat="Sports">Sports News 2</div>
+<div class="card" data-cat="Technology">Tech News 2</div>
+
+<script>
+function filter(cat){
+    let cards=document.querySelectorAll(".card");
+
+    cards.forEach(c=>{
+        if(cat=="All" || c.dataset.cat==cat)
+            c.style.display="inline-block";
+        else
+            c.style.display="none";
+    });
+}
+</script>
+
+</body>
+</html>

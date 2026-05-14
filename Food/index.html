@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{border:1px solid black;border-collapse:collapse;padding:8px}
+</style>
+</head>
+<body>
+
+<form action="order" method="post">
+<table>
+<tr><th>Item</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+
+<tr><td>Pizza</td><td>200</td><td><input type="number" id="q1" value="0" oninput="calc()"></td><td id="t1">0</td></tr>
+<tr><td>Burger</td><td>150</td><td><input type="number" id="q2" value="0" oninput="calc()"></td><td id="t2">0</td></tr>
+<tr><td>Pasta</td><td>180</td><td><input type="number" id="q3" value="0" oninput="calc()"></td><td id="t3">0</td></tr>
+<tr><td>Fries</td><td>100</td><td><input type="number" id="q4" value="0" oninput="calc()"></td><td id="t4">0</td></tr>
+<tr><td>Sandwich</td><td>120</td><td><input type="number" id="q5" value="0" oninput="calc()"></td><td id="t5">0</td></tr>
+<tr><td>Juice</td><td>80</td><td><input type="number" id="q6" value="0" oninput="calc()"></td><td id="t6">0</td></tr>
+
+</table>
+
+<h3>Grand Total: ₹<span id="grand">0</span></h3>
+<h3>Delivery: ₹<span id="delivery">0</span></h3>
+<h3>Final Total: ₹<span id="final">0</span></h3>
+
+<input type="hidden" name="total" id="htotal">
+
+<button type="submit">Place Order</button>
+</form>
+
+<script>
+function calc(){
+    let prices=[200,150,180,100,120,80];
+    let total=0;
+
+    for(let i=1;i<=6;i++){
+        let qty=document.getElementById("q"+i).value;
+        let item=qty*prices[i-1];
+        document.getElementById("t"+i).innerHTML=item;
+        total+=item;
+    }
+
+    let delivery=total<500 && total>0 ? 50 : 0;
+    let final=total+delivery;
+
+    grand.innerHTML=total;
+    document.getElementById("delivery").innerHTML=delivery;
+    document.getElementById("final").innerHTML=final;
+    htotal.value=final;
+}
+</script>
+
+</body>
+</html>

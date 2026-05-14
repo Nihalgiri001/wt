@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:5px;
+}
+.high{
+    background:yellow;
+}
+</style>
+</head>
+<body>
+
+<select id="genre" onchange="load()">
+    <option value="">All</option>
+    <option>Sci-Fi</option>
+    <option>Action</option>
+    <option>Romance</option>
+</select>
+
+<table>
+<tr>
+    <th>Title</th>
+    <th>Genre</th>
+    <th>Year</th>
+    <th>Rating</th>
+    <th>Language</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+function load(){
+    fetch("movies.xml")
+    .then(r=>r.text())
+    .then(str=>{
+        let xml=new DOMParser().parseFromString(str,"text/xml");
+        let movies=xml.getElementsByTagName("movie");
+        let out="";
+        let g=document.getElementById("genre").value;
+
+        for(let m of movies){
+            let genre=m.getElementsByTagName("genre")[0].textContent;
+            let rating=parseFloat(m.getElementsByTagName("rating")[0].textContent);
+
+            if(g=="" || g==genre){
+                out+=`
+                <tr class="${rating>=8?'high':''}">
+                <td>${m.getElementsByTagName("title")[0].textContent}</td>
+                <td>${genre}</td>
+                <td>${m.getElementsByTagName("year")[0].textContent}</td>
+                <td>${rating}</td>
+                <td>${m.getElementsByTagName("language")[0].textContent}</td>
+                </tr>`;
+            }
+        }
+        data.innerHTML=out;
+    });
+}
+load();
+</script>
+
+</body>
+</html>

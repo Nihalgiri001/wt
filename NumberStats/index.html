@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:5px;
+}
+.even{
+    background:lightblue;
+}
+</style>
+</head>
+<body>
+
+Enter N: <input type="number" id="n">
+<button onclick="generate()">Generate</button>
+
+<table>
+<tr>
+    <th>Number</th>
+    <th>Square</th>
+    <th>Cube</th>
+    <th>Even/Odd</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+function generate(){
+    let n=document.getElementById("n").value;
+    let out="";
+
+    for(let i=1;i<=n;i++){
+        out+=`
+        <tr class="${i%2==0?'even':''}">
+        <td>${i}</td>
+        <td>${i*i}</td>
+        <td>${i*i*i}</td>
+        <td>${i%2==0?'Even':'Odd'}</td>
+        </tr>`;
+    }
+
+    data.innerHTML=out;
+}
+</script>
+
+</body>
+</html>

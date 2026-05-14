@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
+}
+div{
+border:1px solid black;
+padding:20px;
+text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div>
+<form action="login" method="post" onsubmit="return validate()">
+    <h2>Login</h2>
+
+    <input type="text" name="username" id="u" placeholder="Username"><br><br>
+
+    <input type="password" name="password" id="p" placeholder="Password">
+    <button type="button" onclick="toggle()">Show</button><br><br>
+
+    <button type="submit">Login</button>
+</form>
+</div>
+
+<script>
+function toggle(){
+    p.type = p.type=="password" ? "text" : "password";
+}
+
+function validate(){
+    let user=u.value;
+    let pass=p.value;
+
+    if(user.length < 6){
+        alert("Username min 6 chars");
+        return false;
+    }
+
+    let pattern=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/;
+
+    if(!pattern.test(pass)){
+        alert("Invalid password");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>

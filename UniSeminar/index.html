@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{font-family:Arial;text-align:center}
+.banner{background:lightblue;padding:20px}
+.card{
+    display:inline-block;
+    border:1px solid black;
+    padding:15px;
+    margin:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.card:hover{
+    transform:scale(1.1);
+    background:lightgray;
+}
+table,th,td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:5px;
+    margin:auto;
+}
+.modal{
+    display:none;
+    position:fixed;
+    top:30%;
+    left:35%;
+    background:white;
+    border:1px solid black;
+    padding:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+    <h1>University Seminar 2026</h1>
+</div>
+
+<div class="card" onclick="show('Dr. Ravi - AI Expert')">Dr. Ravi</div>
+<div class="card" onclick="show('Dr. Priya - Cyber Security Expert')">Dr. Priya</div>
+
+<br><br>
+
+<table>
+<tr><th>Time</th><th>Session</th></tr>
+<tr><td>10 AM</td><td>AI Talk</td></tr>
+<tr><td>12 PM</td><td>Cyber Security</td></tr>
+</table>
+
+<br>
+
+<button>Register</button>
+
+<div class="modal" id="modal">
+    <p id="info"></p>
+    <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+function show(text){
+    info.innerHTML=text;
+    modal.style.display="block";
+}
+
+function closeModal(){
+    modal.style.display="none";
+}
+</script>
+
+</body>
+</html>

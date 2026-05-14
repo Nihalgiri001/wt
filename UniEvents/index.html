@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{
+    border:1px solid black;
+    border-collapse:collapse;
+    padding:5px;
+}
+</style>
+</head>
+<body>
+
+<input type="text" id="dept" placeholder="Search Department" onkeyup="load()">
+
+<table>
+<tr>
+    <th>Event Name</th>
+    <th>Department</th>
+    <th>Date</th>
+    <th>Venue</th>
+    <th>Organizer</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<script>
+function load(){
+    fetch("events.xml")
+    .then(r=>r.text())
+    .then(str=>{
+        let xml=new DOMParser().parseFromString(str,"text/xml");
+        let events=[...xml.getElementsByTagName("event")];
+        let search=dept.value.toLowerCase();
+
+        events.sort((a,b)=>
+            new Date(a.getElementsByTagName("date")[0].textContent) -
+            new Date(b.getElementsByTagName("date")[0].textContent)
+        );
+
+        let out="";
+
+        for(let e of events){
+            let d=e.getElementsByTagName("department")[0].textContent;
+
+            if(d.toLowerCase().includes(search)){
+                out+=`
+                <tr>
+                <td>${e.getElementsByTagName("name")[0].textContent}</td>
+                <td>${d}</td>
+                <td>${e.getElementsByTagName("date")[0].textContent}</td>
+                <td>${e.getElementsByTagName("venue")[0].textContent}</td>
+                <td>${e.getElementsByTagName("organizer")[0].textContent}</td>
+                </tr>`;
+            }
+        }
+
+        data.innerHTML=out;
+    });
+}
+load();
+</script>
+
+</body>
+</html>

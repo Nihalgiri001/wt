@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="convert" method="post" onsubmit="return validate()">
+    Amount: <input type="number" name="amount" id="amt"><br><br>
+
+    From:
+    <select name="from">
+        <option>INR</option>
+        <option>USD</option>
+        <option>EUR</option>
+    </select><br><br>
+
+    To:
+    <select name="to">
+        <option>USD</option>
+        <option>INR</option>
+        <option>EUR</option>
+    </select><br><br>
+
+    <button type="submit">Convert</button>
+</form>
+
+<script>
+function validate(){
+    let a=document.getElementById("amt").value;
+    if(a<=0){
+        alert("Enter valid amount");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>
